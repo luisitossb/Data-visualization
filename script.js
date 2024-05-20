@@ -34,3 +34,35 @@ window.addEventListener('load', function() {
     tableView.style.display = savedView === 'table' ? 'block' : 'none';
     otherView.style.display = savedView === 'table' ? 'none' : 'block';
 });
+
+// profile.js
+
+document.getElementById('profileForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // For demonstration purposes, we'll use Local Storage to store profile data.
+    // In a real application, you would send this data to a server.
+
+    const profile = {
+        username: username,
+        email: email,
+        password: password
+    };
+
+    localStorage.setItem('profile', JSON.stringify(profile));
+    alert('Profile updated successfully');
+});
+
+// Load the profile data when the page loads
+window.addEventListener('load', function() {
+    const savedProfile = JSON.parse(localStorage.getItem('profile'));
+
+    if (savedProfile) {
+        document.getElementById('username').value = savedProfile.username;
+        document.getElementById('email').value = savedProfile.email;
+    }
+});
